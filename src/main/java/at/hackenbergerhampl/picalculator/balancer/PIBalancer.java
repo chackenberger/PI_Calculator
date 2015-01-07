@@ -48,7 +48,7 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 	 * @param digits digits of pi
 	 * @return pi
 	 */
-	public BigDecimal pi(int digits) {
+	public BigDecimal pi(int digits) throws RemoteException {
 		RemoteCalculator rc = this.getNextRemoteCalculator();
 		if(rc != null)
 			return rc.pi(digits);
@@ -56,17 +56,17 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 			return null;
 	}
 
-	public void addRemoteCalculator(RemoteCalculator server) {
+	public void addRemoteCalculator(RemoteCalculator server) throws RemoteException {
 		servers.add(server);
 		
 	}
 
 
-	public boolean removeRemoteCalculator(RemoteCalculator server) {
+	public boolean removeRemoteCalculator(RemoteCalculator server) throws RemoteException {
 		return servers.remove(server);
 	}
 
-	public RemoteCalculator getNextRemoteCalculator() {
+	public RemoteCalculator getNextRemoteCalculator() throws RemoteException {
 		RemoteCalculator rc = servers.poll();
 		servers.add(rc);
 		return rc;

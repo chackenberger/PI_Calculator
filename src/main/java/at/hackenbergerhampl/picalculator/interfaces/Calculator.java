@@ -1,6 +1,7 @@
 package at.hackenbergerhampl.picalculator.interfaces;
 
 import java.math.BigDecimal;
+import java.rmi.RemoteException;
 
 /**
  * A Calculator
@@ -19,7 +20,8 @@ public interface Calculator {
 	 * 
 	 * @param digits digits of pi
 	 * @return pi
+	 * @throws RemoteException
 	 */
-	public BigDecimal pi(int digits);
+	public BigDecimal pi(int digits) throws RemoteException;
 
 }
