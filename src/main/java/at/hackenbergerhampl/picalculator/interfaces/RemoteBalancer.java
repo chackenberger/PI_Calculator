@@ -4,10 +4,10 @@ import java.rmi.Remote;
 
 public interface RemoteBalancer extends Remote {
 
-	public abstract void addRemoteCalculator(RemoteCalculator server);
+	public void addRemoteCalculator(RemoteCalculator server);
 
-	public abstract boolean removeRemoteCalculator(RemoteCalculator server);
+	public boolean removeRemoteCalculator(RemoteCalculator server);
 
-	public abstract RemoteCalculator getRandomCalculator();
+	public RemoteCalculator getRandomCalculator();
 
 }
