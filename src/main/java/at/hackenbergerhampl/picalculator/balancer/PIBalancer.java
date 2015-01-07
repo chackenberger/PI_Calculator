@@ -4,7 +4,9 @@ import at.hackenbergerhampl.picalculator.interfaces.RemoteBalancer;
 import at.hackenbergerhampl.picalculator.interfaces.RemoteCalculator;
 
 import java.math.BigDecimal;
+import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -69,7 +71,17 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 		servers.add(rc);
 		return rc;
 	}
-	
-	
 
+	public void close() {
+		try {
+			reg.unbind("picalc");
+			UnicastRemoteObject.unexportObject(reg, true);
+		} catch (AccessException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
