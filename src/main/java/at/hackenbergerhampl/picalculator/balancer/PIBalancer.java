@@ -26,7 +26,7 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 	 * 
 	 */
 	private static final long serialVersionUID = 1973999418059633612L;
-	private ConcurrentLinkedQueue<RemoteCalculator> servers;
+	private ConcurrentLinkedQueue<RemoteCalculator> servers = new ConcurrentLinkedQueue<>();
 	private Registry reg;
 	
 	/**
