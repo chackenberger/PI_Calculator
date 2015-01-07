@@ -1,0 +1,14 @@
+
+args:
+    Client:
+        -h host/ip balancer/server
+        -p port
+        -n digits pi
+    Balancer:
+        -p port
+    Server:
+        -h host/ip balancer (optional)
+        -p port
+
+port: all optional, default 1099
+

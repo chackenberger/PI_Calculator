@@ -2,8 +2,24 @@ package at.hackenbergerhampl.picalculator.interfaces;
 
 import java.math.BigDecimal;
 
+/**
+ * A Calculator
+ * 
+ * @author Burkhard Hampl
+ */
 public interface Calculator {
-
-	public BigDecimal pi(int anzahl_nachkommastellen);
+	
+	/**
+	 * Compute the value of pi to the specified number of digits after the
+	 * decimal point. The value is computed using Machin's formula:
+	 *
+	 * pi/4 = 4*arctan(1/5) - arctan(1/239)
+	 *
+	 * and a power series expansion of arctan(x) to sufficient precision.
+	 * 
+	 * @param digits digits of pi
+	 * @return pi
+	 */
+	public BigDecimal pi(int digits);
 
 }
