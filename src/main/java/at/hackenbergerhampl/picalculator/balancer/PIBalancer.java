@@ -9,46 +9,67 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * Represents a {@link PIBalancer} which balances request for pi calculation and direct them to a
+ * calculation server
+ * 
+ * @author Hackenberger Christoph
+ * @version 1.0
+ */
 public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator, RemoteBalancer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1973999418059633612L;
-	private List servers;
+	private ConcurrentLinkedQueue<RemoteCalculator> servers;
 	private Registry reg;
 	
-	public PIBalancer(int port) throws RemoteException {
+	/**
+	 * Creates a new instance of a {@link PIBalancer}
+	 * 
+	 * @param port the port the registry should bind on
+	 * @throws RemoteException  if the registry could not be exported
+	 * @throws AlreadyBoundException if there is another {@link PIBalancer} or {@link PIRemoteServer} is already bound
+	 */
+	public PIBalancer(int port) throws RemoteException, AlreadyBoundException {
 		super();
 		reg = LocateRegistry.createRegistry(port);
-		try {
-			reg.bind("picalc", this);
-		} catch (AlreadyBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		reg.bind("picalc", this);
 	}
 
-	public BigDecimal pi(int anzahl_nachkommastellen) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Delegates the pi calculation to one of his calculation servers
+	 * 
+	 * @param digits digits of pi
+	 * @return pi
+	 */
+	public BigDecimal pi(int digits) {
+		RemoteCalculator rc = this.getNextRemoteCalculator();
+		if(rc != null)
+			return rc.pi(digits);
+		else
+			return null;
 	}
 
 	public void addRemoteCalculator(RemoteCalculator server) {
-		// TODO Auto-generated method stub
+		servers.add(server);
 		
 	}
 
+
 	public boolean removeRemoteCalculator(RemoteCalculator server) {
-		// TODO Auto-generated method stub
-		return false;
+		return servers.remove(server);
 	}
 
-	public RemoteCalculator getRandomCalculator() {
-		// TODO Auto-generated method stub
-		return null;
+	public RemoteCalculator getNextRemoteCalculator() {
+		RemoteCalculator rc = servers.poll();
+		servers.add(rc);
+		return rc;
 	}
+	
+	
 
 }
