@@ -41,6 +41,8 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 		super();
 		reg = LocateRegistry.createRegistry(port);
 		reg.bind("picalc", this);
+		System.out.println("Balancer successfully started!");
+		System.out.println("Registy successfully bounded!");
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 	 * @return pi
 	 */
 	public BigDecimal pi(int digits) throws RemoteException {
-		System.out.println("PI request received directing to server");
+		System.out.println("PI request with " + digits + " digits received. Directing to server!");
 		RemoteCalculator rc = this.getNextRemoteCalculator();
 		if(rc != null) {
 			try {

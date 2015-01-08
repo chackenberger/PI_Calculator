@@ -61,7 +61,8 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("Server successfully started!");
+		System.out.println("Server successfully connected to Balancer!");
 	}
 
 	/**
@@ -81,17 +82,20 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 		super();
 		this.reg = LocateRegistry.createRegistry(port);
 		this.reg.bind("picalc", this);
+		System.out.println("Server successfully started!");
+		System.out.println("Registy successfully bounded!");
 	}
 
 	// Source http://homepage.uibk.ac.at/~csag8802/client/Pi.java
 
 	public BigDecimal pi(int digits) throws RemoteException {
-		System.out.println("Start calculating Pi");
+		System.out.println("Start calculating PI with " + digits + " digits");
+		long ms = System.currentTimeMillis();
 		int scale = digits + 5;
 		BigDecimal arctan1_5 = arctan(5, scale);
 		BigDecimal arctan1_239 = arctan(239, scale);
 		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
-		System.out.println("Stoped calculating Pi");
+		System.out.println("Finished calculation with " + (System.currentTimeMillis() - ms) + "ms");
 		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
 	}
 
