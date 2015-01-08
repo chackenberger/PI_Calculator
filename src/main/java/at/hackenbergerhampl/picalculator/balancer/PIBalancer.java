@@ -75,7 +75,8 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 
 	public RemoteCalculator getNextRemoteCalculator() throws RemoteException {
 		RemoteCalculator rc = servers.poll();
-		servers.add(rc);
+		if(rc != null)
+			servers.add(rc);
 		return rc;
 	}
 
