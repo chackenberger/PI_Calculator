@@ -5,6 +5,12 @@ import java.rmi.RemoteException;
 
 import at.hackenbergerhampl.picalculator.error.InvalidOptionException;
 
+/**
+ * Main class for the Balancer
+ * 
+ * @author Hackenberger Christoph
+ * @version 1.0
+ */
 public class Main {
 
 	public static void main(String[] args) {
