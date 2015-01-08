@@ -24,8 +24,12 @@
 			</resource>
 			<resource>
 				<filtering>false</filtering>
-				<directory>doc/</directory>
-				<targetPath>doc</targetPath>
+				<directory>files/</directory>
+				<targetPath>files</targetPath>
+				<includes>
+					<include>documents/*.pdf</include>
+					<include>documents/*.asta</include>
+				</includes>
 			</resource>
 		</resources>
 		<plugins>
