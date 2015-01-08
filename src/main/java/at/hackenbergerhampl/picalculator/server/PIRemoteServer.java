@@ -33,6 +33,8 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 
 	private Registry reg;
 
+	private String balacerURL;
+
 	/**
 	 * Creates a new instance of a {@link PIRemoteServer} which connects to a
 	 * {@link PIBalancer}
@@ -51,8 +53,8 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 	public PIRemoteServer(String host, int port) throws RemoteException, AlreadyBoundException {
 		super();
 		try {
-			RemoteBalancer rb;
-			rb = (RemoteBalancer) Naming.lookup("rmi://" + host + ":" + port + "/picalc");
+			this.balacerURL = "rmi://" + host + ":" + port + "/picalc";
+			RemoteBalancer rb = (RemoteBalancer) Naming.lookup(this.balacerURL);
 			rb.addRemoteCalculator(this);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -61,6 +63,13 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				close();
+				System.out.println("Server succsessfully stopped");
+			}
+		}));
 		System.out.println("Server successfully started!");
 		System.out.println("Server successfully connected to Balancer!");
 	}
@@ -132,14 +141,17 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 
 	public void close() {
 		try {
+			if ((this.balacerURL != null) && (this.reg == null)) {
+				RemoteBalancer rb = (RemoteBalancer) Naming.lookup(this.balacerURL);
+				rb.removeRemoteCalculator(this);
+			} else {
+				this.reg.unbind("picalc");
+			}
 			UnicastRemoteObject.unexportObject(this, true);
-			this.reg.unbind("picalc");
 		} catch (AccessException e) {
-			e.printStackTrace();
 		} catch (RemoteException e) {
-			e.printStackTrace();
 		} catch (NotBoundException e) {
-			e.printStackTrace();
+		} catch (MalformedURLException e) {
 		}
 	}
 
