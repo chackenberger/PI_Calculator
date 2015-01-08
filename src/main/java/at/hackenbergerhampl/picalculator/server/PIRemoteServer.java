@@ -89,6 +89,13 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 		super();
 		this.reg = LocateRegistry.createRegistry(port);
 		this.reg.bind("picalc", this);
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				close();
+				System.out.println("Server succsessfully stopped");
+			}
+		}));
 		System.out.println("Server successfully started!");
 		System.out.println("Registy successfully bounded!");
 	}
