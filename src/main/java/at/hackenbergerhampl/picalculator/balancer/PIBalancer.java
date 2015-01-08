@@ -88,11 +88,8 @@ public class PIBalancer extends UnicastRemoteObject implements RemoteCalculator,
 			reg.unbind("picalc");
 			UnicastRemoteObject.unexportObject(reg, true);
 		} catch (AccessException e) {
-			e.printStackTrace();
 		} catch (RemoteException e) {
-			e.printStackTrace();
 		} catch (NotBoundException e) {
-			e.printStackTrace();
 		}
 	}
 }

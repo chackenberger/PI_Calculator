@@ -23,10 +23,10 @@ public class Main {
 		}
 		try {
 			new PIBalancer(p.getPort());
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (AlreadyBoundException e) {
-			e.printStackTrace();
+		} catch (RemoteException ex) {
+			System.out.println(ex.getMessage());
+		} catch (AlreadyBoundException ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 
