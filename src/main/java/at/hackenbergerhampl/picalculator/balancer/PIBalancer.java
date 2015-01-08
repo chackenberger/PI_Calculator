@@ -2,6 +2,7 @@ package at.hackenbergerhampl.picalculator.balancer;
 
 import at.hackenbergerhampl.picalculator.interfaces.RemoteBalancer;
 import at.hackenbergerhampl.picalculator.interfaces.RemoteCalculator;
+import at.hackenbergerhampl.picalculator.server.PIRemoteServer;
 
 import java.math.BigDecimal;
 import java.rmi.AccessException;

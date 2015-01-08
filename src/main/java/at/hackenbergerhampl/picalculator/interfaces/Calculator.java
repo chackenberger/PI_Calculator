@@ -20,7 +20,7 @@ public interface Calculator {
 	 * 
 	 * @param digits digits of pi
 	 * @return pi
-	 * @throws RemoteException
+	 * @throws RemoteException when there is a failure with the rmi connection
 	 */
 	public BigDecimal pi(int digits) throws RemoteException;
 
