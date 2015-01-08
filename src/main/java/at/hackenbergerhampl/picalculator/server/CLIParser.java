@@ -9,15 +9,13 @@ import org.kohsuke.args4j.Option;
 import at.hackenbergerhampl.picalculator.error.InvalidOptionException;
 
 /**
- * A Parser to parse options and arguments from the CLI for {@link PIRemoteServer}
+ * A Parser to parse options and arguments from the CLI for
+ * {@link PIRemoteServer}
  * 
  * @author Burkhard Hampl
  * @version 1.0
  */
 public class CLIParser {
-
-	
-	
 
 	@Option(name = "-p", usage = "the port on which the PIRemoteServer should bind on or the port on which the PIBalancer listen on (default 1099)")
 	private int port = 1099;
@@ -25,7 +23,6 @@ public class CLIParser {
 	@Option(name = "-h", usage = "the ip or domain where the PIBalancer is")
 	private String host;
 
-	
 	/**
 	 * This method starts the parsing of the options and arguments
 	 *

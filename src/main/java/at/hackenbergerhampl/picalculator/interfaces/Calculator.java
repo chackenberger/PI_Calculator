@@ -4,9 +4,10 @@ import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
 /**
- * A Calculator
+ * A Calculator of PI
  * 
  * @author Burkhard Hampl
+ * @version 1.0
  */
 public interface Calculator {
 	

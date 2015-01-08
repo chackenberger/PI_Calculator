@@ -19,13 +19,10 @@ import at.hackenbergerhampl.picalculator.interfaces.RemoteCalculator;
  * Calculates Pi with a spacific number of digits
  * 
  * @author Burkhard Hampl
- *
+ * @version 1.0
  */
 public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalculator {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6197298247159975736L;
 
 	/** constants used in pi computation */
@@ -68,14 +65,16 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 	}
 
 	/**
-	 * Creates a new instance of a {@link PIRemoteServer}
+	 * Creates a new instance of a {@link PIRemoteServer} which creates a local
+	 * {@link Registry} and dose not connect to a {@link RemoteBalancer}
 	 * 
-	 * @param port the port the registry should bind on
+	 * @param port
+	 *            the port the registry should bind on
 	 * 
 	 * @throws RemoteException
 	 *             if the registry could not be exported
 	 * @throws AlreadyBoundException
-	 *             if there is another {@link PIBalancer} or
+	 *             if there is another {@link RemoteBalancer} or
 	 *             {@link PIRemoteServer} already bound
 	 */
 	public PIRemoteServer(int port) throws RemoteException, AlreadyBoundException {
@@ -86,7 +85,7 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 
 	// Source http://homepage.uibk.ac.at/~csag8802/client/Pi.java
 
-	public BigDecimal pi(int digits) throws RemoteException{
+	public BigDecimal pi(int digits) throws RemoteException {
 		System.out.println("Start calculating Pi");
 		int scale = digits + 5;
 		BigDecimal arctan1_5 = arctan(5, scale);

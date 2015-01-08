@@ -8,6 +8,12 @@ import java.rmi.RemoteException;
 import at.hackenbergerhampl.picalculator.error.InvalidOptionException;
 import at.hackenbergerhampl.picalculator.interfaces.RemoteCalculator;
 
+/**
+ * Main class of Client
+ * 
+ * @author Burkhard Hampl
+ * @version 1.0
+ */
 public class Main {
 
 	public static void main(String[] args) {

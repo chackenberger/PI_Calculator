@@ -8,6 +8,12 @@ import org.kohsuke.args4j.Option;
 
 import at.hackenbergerhampl.picalculator.error.InvalidOptionException;
 
+/**
+ * A Parser to parse options and arguments from the CLI for {@link Main}
+ * 
+ * @author Burkhard Hampl
+ * @version 1.0
+ */
 public class CLIParser {
 
 	@Option(name = "-p", usage = "the port on which the PIBalancer listen on (default 1099)")
