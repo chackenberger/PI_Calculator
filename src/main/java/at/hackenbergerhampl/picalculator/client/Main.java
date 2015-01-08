@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.UnmarshalException;
 
 import at.hackenbergerhampl.picalculator.error.InvalidOptionException;
 import at.hackenbergerhampl.picalculator.interfaces.RemoteCalculator;
@@ -31,15 +32,14 @@ public class Main {
 			rb = (RemoteCalculator) Naming.lookup("rmi://" + p.getHost() + ":" + p.getPort() + "/picalc");
 			BigDecimal pi = rb.pi(p.getPiDigits());
 			System.out.println(pi != null ? pi : "There is currently no calculation server available!");
+		}catch (UnmarshalException ex) {
+			System.out.println("Connection was closed unexpectedly!");
+		} catch (RemoteException ex) {
+			System.out.println("There is currently no calculation server available!");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("The host adress you entered is not valid!");
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("There is currently no calculation server available!");
 		}
 	}
 

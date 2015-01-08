@@ -19,7 +19,6 @@ public class Main {
 		} catch (InvalidOptionException ex) {
 			System.out.println(ex.getMessage());
 			System.exit(1);
-			;
 		}
 		try {
 			if (p.getHost() == null) {
@@ -27,10 +26,10 @@ public class Main {
 			} else {
 				new PIRemoteServer(p.getHost(), p.getPort());
 			}
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (AlreadyBoundException e) {
-			e.printStackTrace();
+		} catch (RemoteException ex) {
+			System.out.println(ex.getMessage());
+		} catch (AlreadyBoundException ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 

@@ -50,18 +50,16 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 	 *             if there is another {@link PIBalancer} or
 	 *             {@link PIRemoteServer} already bound
 	 */
-	public PIRemoteServer(String host, int port) throws RemoteException, AlreadyBoundException {
+	public PIRemoteServer(String host, int port) throws RemoteException {
 		super();
 		try {
 			this.balacerURL = "rmi://" + host + ":" + port + "/picalc";
 			RemoteBalancer rb = (RemoteBalancer) Naming.lookup(this.balacerURL);
 			rb.addRemoteCalculator(this);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RemoteException("The host adress you entered is not valid!");
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RemoteException("There is currently no Balancer available!");
 		}
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
