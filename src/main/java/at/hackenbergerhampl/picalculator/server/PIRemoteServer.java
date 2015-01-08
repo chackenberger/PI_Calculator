@@ -46,9 +46,6 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 	 * 
 	 * @throws RemoteException
 	 *             if the registry could not be exported
-	 * @throws AlreadyBoundException
-	 *             if there is another {@link PIBalancer} or
-	 *             {@link PIRemoteServer} already bound
 	 */
 	public PIRemoteServer(String host, int port) throws RemoteException {
 		super();
