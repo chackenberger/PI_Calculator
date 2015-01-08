@@ -87,10 +87,12 @@ public class PIRemoteServer extends UnicastRemoteObject implements RemoteCalcula
 	// Source http://homepage.uibk.ac.at/~csag8802/client/Pi.java
 
 	public BigDecimal pi(int digits) throws RemoteException{
+		System.out.println("Start calculating Pi");
 		int scale = digits + 5;
 		BigDecimal arctan1_5 = arctan(5, scale);
 		BigDecimal arctan1_239 = arctan(239, scale);
 		BigDecimal pi = arctan1_5.multiply(FOUR).subtract(arctan1_239).multiply(FOUR);
+		System.out.println("Stoped calculating Pi");
 		return pi.setScale(digits, BigDecimal.ROUND_HALF_UP);
 	}
 
