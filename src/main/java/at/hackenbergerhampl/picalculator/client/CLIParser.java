@@ -13,7 +13,7 @@ public class CLIParser {
 	@Option(name = "-p", usage = "the port on which the PIBalancer listen on (default 1099)")
 	private int port = 1099;
 
-	@Option(name = "-h", usage = "the ip or domain of the PIBalancer")
+	@Option(name = "-h", usage = "the ip or domain of the PIBalancer", required = true)
 	private String host;
 
 	@Option(name = "-n", usage = "the specified number of digits after the decimal point of pi", required = true)
@@ -43,7 +43,7 @@ public class CLIParser {
 	}
 
 	public String getHost() {
-		return this.getHost();
+		return this.host;
 	}
 
 	public int getPort() {
