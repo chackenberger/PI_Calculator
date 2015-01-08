@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		CLIParser p = new CLIParser();
 		try {
-			p.parse(args, "java -jar PIRemoteServer.jar [options]");
+			p.parse(args, "java -jar PIClient.jar [options]");
 		} catch (InvalidOptionException ex) {
 			System.out.println(ex.getMessage());
 			System.exit(1);
