@@ -23,6 +23,7 @@ public interface RemoteBalancer extends Remote {
 	 * Removes a {@link RemoteCalculator} from the server list
 	 * 
 	 * @param server {@link RemoteCalculator} to remove
+	 * @return true if the {@link RemoteCalculator} was removed, false if not
 	 * @throws RemoteException when there is a failure with the rmi connection
 	 */
 	public boolean removeRemoteCalculator(RemoteCalculator server) throws RemoteException;

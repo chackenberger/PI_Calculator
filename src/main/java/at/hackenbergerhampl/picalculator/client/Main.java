@@ -1,5 +1,6 @@
 package at.hackenbergerhampl.picalculator.client;
 
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -28,7 +29,8 @@ public class Main {
 		try {
 			RemoteCalculator rb;
 			rb = (RemoteCalculator) Naming.lookup("rmi://" + p.getHost() + ":" + p.getPort() + "/picalc");
-			System.out.println(rb.pi(p.getPiDigits()));
+			BigDecimal pi = rb.pi(p.getPiDigits());
+			System.out.println(pi != null ? pi : "There is currently no calculation server available!");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
